@@ -1,0 +1,8 @@
+project:
+    ident: revel
+    name: Revel
+    one_liner: Revel is a golang powered web applcation framwork
+    domain: revelframework.com
+    www: http://www.{domain}
+    test: http://test.{domain}
+    

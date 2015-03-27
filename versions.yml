@@ -1,0 +1,13 @@
+versions:
+     - 
+        version: 0.13 
+        label: future
+    -
+        version: 0.12
+        label: stable
+        stable: true
+        date: 2015-03-25
+    -
+        version: 0.11
+        label: last stable
+        
