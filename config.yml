@@ -1,0 +1,50 @@
+repos:
+  - revel
+  - cmd
+  - modules
+  - examples
+
+milestones:
+  - version: Backlog
+  - version: v0.14
+    date: 2017-03-31
+  - version: v0.15
+    date: 2017-04-30
+  - version: v0.16
+    date: 2017-05-31
+
+labels:
+  - name: effort-days
+    color: 207de5 # blue
+  - name: effort-hours
+    color: 207de5
+  - name: effort-minutes
+    color: 207de5
+
+  - name: priority-could
+    color: 5319e7 # purple
+  - name: priority-should
+    color: 5319e7
+  - name: priority-must
+    color: 5319e7
+
+  - name: status-accepted
+    color: 009800 # green
+  - name: status-analysis
+    color: eb6420 # orange
+  - name: status-declined
+    color: e11d21 # red
+  - name: status-waiting-for-reply
+    color: eb6420 # orange
+
+  - name: type-bug
+    color: e11d21 # red
+  - name: type-bug-windows
+    color: e11d21 # red
+  - name: type-docs
+    color: 207de5 # blue
+  - name: type-enhancement
+    color: 207de5 # blue
+  - name: type-feature
+    color: 207de5 # blue
+
