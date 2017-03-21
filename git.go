@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/shawncatz/go-github/github"
+	"github.com/google/go-github/github"
 )
 
 func loadGithub() error {
