@@ -74,6 +74,7 @@ func getLabels(repo string) ([]*github.Label, error) {
 	return out, nil
 }
 
+// Git stores the information retrieved from github
 type Git struct {
 	// list of organization projects
 	Projects []*github.Project
@@ -81,11 +82,13 @@ type Git struct {
 	Repos map[string]GitRepo
 }
 
+// GitRepo stores the repo information from github
 type GitRepo struct {
 	Milestones []*github.Milestone
 	Labels     []*github.Label
 }
 
+// Project finds a project with the given name
 func (g *Git) Project(name string) *github.Project {
 	for _, p := range g.Projects {
 		if *p.Name == name {
@@ -96,6 +99,7 @@ func (g *Git) Project(name string) *github.Project {
 	return nil
 }
 
+// Milestone finds a milestone with the given repo and name
 func (g *Git) Milestone(repo, name string) *github.Milestone {
 	for _, m := range g.Repos[repo].Milestones {
 		if *m.Title == name {
@@ -106,6 +110,7 @@ func (g *Git) Milestone(repo, name string) *github.Milestone {
 	return nil
 }
 
+// Label finds a label with the given repo and name
 func (g *Git) Label(repo, name string) *github.Label {
 	for _, m := range g.Repos[repo].Labels {
 		if *m.Name == name {
@@ -116,6 +121,7 @@ func (g *Git) Label(repo, name string) *github.Label {
 	return nil
 }
 
+// String returns the Git object as a string
 func (g *Git) String() string {
 	s := ""
 
@@ -144,7 +150,7 @@ func (g *Git) String() string {
 	return s
 }
 
-func CreateProject(name, desc string) (*github.Project, error) {
+func createProject(name, desc string) (*github.Project, error) {
 	project, _, err := client.Organizations.CreateProject(ctx, ORG, &github.ProjectOptions{Name: name, Body: desc})
 	if err != nil {
 		return nil, err
@@ -160,7 +166,7 @@ func CreateProject(name, desc string) (*github.Project, error) {
 	return project, nil
 }
 
-func CreateMilestone(repo, name, date string) (*github.Milestone, error) {
+func createMilestone(repo, name, date string) (*github.Milestone, error) {
 	opt := &github.Milestone{Title: &name}
 	if date != "" {
 		t, err := time.Parse("2006-01-02", date)
@@ -178,7 +184,7 @@ func CreateMilestone(repo, name, date string) (*github.Milestone, error) {
 	return m, nil
 }
 
-func CreateLabel(repo, name, color string) (*github.Label, error) {
+func createLabel(repo, name, color string) (*github.Label, error) {
 	opt := &github.Label{Name: &name, Color: &color}
 
 	l, _, err := client.Issues.CreateLabel(ctx, ORG, repo, opt)

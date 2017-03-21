@@ -8,7 +8,10 @@ import (
 	"github.com/shawncatz/go-github/github"
 )
 
+// FILE is the location of the config.yml file
 const FILE = "config.yml"
+
+// ORG is the name of the organization
 const ORG = "revel"
 
 var (
@@ -39,7 +42,7 @@ func main() {
 		p := git.Project(m.Version)
 		if p == nil {
 			fmt.Printf("create project on org: %s\n", m.Version)
-			_, err := CreateProject(m.Version, "Collect all work for "+m.Version)
+			_, err := createProject(m.Version, "Collect all work for "+m.Version)
 			if err != nil {
 				log.Fatalf("error creating project: %s", err)
 			}
@@ -51,7 +54,7 @@ func main() {
 			gm := git.Milestone(r, m.Version)
 			if gm == nil {
 				fmt.Printf("create milestone %s on repo %s\n", m.Version, r)
-				_, err := CreateMilestone(r, m.Version, m.Date)
+				_, err := createMilestone(r, m.Version, m.Date)
 				if err != nil {
 					log.Fatalf("error creating milestone: %s", err)
 				}
@@ -62,7 +65,7 @@ func main() {
 			gl := git.Label(r, l.Name)
 			if gl == nil {
 				fmt.Printf("create label %s on repo %s\n", l.Name, r)
-				_, err := CreateLabel(r, l.Name, l.Color)
+				_, err := createLabel(r, l.Name, l.Color)
 				if err != nil {
 					log.Fatalf("error creating label: %s", err)
 				}

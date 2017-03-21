@@ -25,6 +25,7 @@ func loadConfig() error {
 	return nil
 }
 
+// Config contains the data in config.yml
 type Config struct {
 	Repos      []string
 	Milestones []Milestone
@@ -34,16 +35,19 @@ type Config struct {
 	}
 }
 
+// Milestone contains the milestones from config.yml
 type Milestone struct {
 	Date    string
 	Version string
 }
 
+// Label contains the labels from config.yml
 type Label struct {
 	Name  string
 	Color string
 }
 
+// Milestone finds the milestone with the given name from the config
 func (c *Config) Milestone(name string) bool {
 	for _, m := range c.Milestones {
 		if m.Version == name {
