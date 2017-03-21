@@ -4,9 +4,9 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/shawncatz/go-github/github"
-	"time"
 )
 
 func loadGithub() error {

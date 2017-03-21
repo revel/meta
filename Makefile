@@ -1,5 +1,6 @@
 
 run: deps
+	go env
 	go run *.go
 
 deps:
