@@ -13,6 +13,7 @@ import (
 )
 
 const FILE = "config.yml"
+const ORG = "revel"
 
 var (
 	ctx    context.Context
@@ -42,6 +43,10 @@ func main() {
 		p := git.Project(m.Version)
 		if p == nil {
 			fmt.Printf("create project on org: %s\n", m.Version)
+			_, err := CreateProject(m.Version, "Collect all work for "+m.Version)
+			if err != nil {
+				log.Fatalf("error creating project: %s", err)
+			}
 		}
 	}
 
@@ -50,6 +55,10 @@ func main() {
 			gm := git.Milestone(r, m.Version)
 			if gm == nil {
 				fmt.Printf("create milestone %s on repo %s\n", m.Version, r)
+				_, err := CreateMilestone(r, m.Version, m.Date)
+				if err != nil {
+					log.Fatalf("error creating milestone: %s", err)
+				}
 			}
 		}
 
@@ -57,6 +66,10 @@ func main() {
 			gl := git.Label(r, l.Name)
 			if gl == nil {
 				fmt.Printf("create label %s on repo %s\n", l.Name, r)
+				_, err := CreateLabel(r, l.Name, l.Color)
+				if err != nil {
+					log.Fatalf("error creating label: %s", err)
+				}
 			}
 		}
 	}
