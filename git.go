@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/shawncatz/go-github/github"
+	"time"
 )
 
 func loadGithub() error {
@@ -22,7 +23,7 @@ func loadGithub() error {
 
 	git = &Git{Repos: make(map[string]GitRepo)}
 
-	projects, _, err := client.Organizations.ListProjects(ctx, "revel", &github.ProjectListOptions{})
+	projects, _, err := client.Organizations.ListProjects(ctx, ORG, &github.ProjectListOptions{})
 	if err != nil {
 		return err
 	}
@@ -30,7 +31,7 @@ func loadGithub() error {
 	git.Projects = projects
 
 	for _, r := range config.Repos {
-		list, _, err := client.Issues.ListMilestones(ctx, "revel", r, &github.MilestoneListOptions{})
+		list, _, err := client.Issues.ListMilestones(ctx, ORG, r, &github.MilestoneListOptions{})
 		if err != nil {
 			return err
 		}
@@ -60,7 +61,7 @@ func getLabels(repo string) ([]*github.Label, error) {
 	lastpage := 0
 
 	for ok := true; ok; ok = (page == lastpage) {
-		labels, resp, err := client.Issues.ListLabels(ctx, "revel", repo, &github.ListOptions{Page: page})
+		labels, resp, err := client.Issues.ListLabels(ctx, ORG, repo, &github.ListOptions{Page: page})
 		if err != nil {
 			return nil, err
 		}
@@ -141,4 +142,49 @@ func (g *Git) String() string {
 	}
 
 	return s
+}
+
+func CreateProject(name, desc string) (*github.Project, error) {
+	project, _, err := client.Organizations.CreateProject(ctx, ORG, &github.ProjectOptions{Name: name, Body: desc})
+	if err != nil {
+		return nil, err
+	}
+
+	for _, c := range config.Project.Columns {
+		_, _, err := client.Projects.CreateProjectColumn(ctx, project.GetID(), &github.ProjectColumnOptions{Name: c})
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return project, nil
+}
+
+func CreateMilestone(repo, name, date string) (*github.Milestone, error) {
+	opt := &github.Milestone{Title: &name}
+	if date != "" {
+		t, err := time.Parse("2006-01-02", date)
+		if err != nil {
+			return nil, err
+		}
+		opt.DueOn = &t
+	}
+
+	m, _, err := client.Issues.CreateMilestone(ctx, ORG, repo, opt)
+	if err != nil {
+		return nil, err
+	}
+
+	return m, nil
+}
+
+func CreateLabel(repo, name, color string) (*github.Label, error) {
+	opt := &github.Label{Name: &name, Color: &color}
+
+	l, _, err := client.Issues.CreateLabel(ctx, ORG, repo, opt)
+	if err != nil {
+		return nil, err
+	}
+
+	return l, nil
 }

@@ -4,6 +4,13 @@ repos:
   - modules
   - examples
 
+project:
+  columns:
+    - todo
+    - in progress
+    - in review
+    - complete
+
 milestones:
   - version: Backlog
   - version: v0.14

@@ -29,6 +29,9 @@ type Config struct {
 	Repos      []string
 	Milestones []Milestone
 	Labels     []Label
+	Project    struct {
+		Columns []string
+	}
 }
 
 type Milestone struct {
