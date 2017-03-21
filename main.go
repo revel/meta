@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/shawncatz/go-github/github"
+	"github.com/google/go-github/github"
 )
 
 // FILE is the location of the config.yml file
