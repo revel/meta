@@ -35,19 +35,23 @@ func main() {
 	//fmt.Printf("config: %#v\n", config)
 	//fmt.Printf(git.String())
 
-	for _, m := range config.Milestones {
-		if m.Version == "Backlog" {
-			continue
-		}
-		p := git.Project(m.Version)
-		if p == nil {
-			fmt.Printf("create project on org: %s\n", m.Version)
-			_, err := createProject(m.Version, "Collect all work for "+m.Version)
-			if err != nil {
-				log.Fatalf("error creating project: %s", err)
-			}
-		}
-	}
+	// disabling this for now...
+	// the GitHub Org Projects do not work very well.
+	// using waffle.io instead.
+	//
+	//for _, m := range config.Milestones {
+	//	if m.Version == "Backlog" {
+	//		continue
+	//	}
+	//	p := git.Project(m.Version)
+	//	if p == nil {
+	//		fmt.Printf("create project on org: %s\n", m.Version)
+	//		_, err := createProject(m.Version, "Collect all work for "+m.Version)
+	//		if err != nil {
+	//			log.Fatalf("error creating project: %s", err)
+	//		}
+	//	}
+	//}
 
 	for _, r := range config.Repos {
 		for _, m := range config.Milestones {
