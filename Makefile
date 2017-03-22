@@ -1,7 +1,5 @@
 
 run: deps
-	go env
-	env | grep GITHUB
 	go run *.go
 
 deps:
