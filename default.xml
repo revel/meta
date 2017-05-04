@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
+  <remote  name="gh" revision="master"
+           fetch="https://github.com/" />
+
   <remote  name="revel"
-           fetch="https://github.com/revel/"
+           fetch="git://github.com/revel"
+           revision="master"/>
+  <remote  name="revel-master"
+           fetch="git://github.com/revel"
            revision="master"/>
 
   <default revision="refs/heads/master"
            remote="revel"/>
 
-  <project name="revel"   remote="revel" path="src/github.com/revel/revel"    groups="core,all" />
-  <project name="modules" remote="revel" path="src/github.com/revel/modules"  groups="core,all" />
-  <project name="cmd"     remote="revel" path="src/github.com/revel/cmd"      groups="core,all" />
+  <project name="revel"   remote="revel" path="src/github.com/revel/revel" revision="server-engine" groups="core,all" />
+  <project name="modules" remote="revel" path="src/github.com/revel/modules" revision="server-engine"  groups="core,all" />
+  <project name="cmd"     remote="revel" path="src/github.com/revel/cmd"   revision="server-engine"   groups="core,all" />
   <project name="cron"    remote="revel" path="src/github.com/revel/cron"     groups="core,all" />
+  <project name="config"    remote="revel" path="src/github.com/revel/config"     groups="core,all" />
+  <project name="fsnotify"    remote="revel-master" path="src/github.com/revel/fsnotify"     groups="core,all" />
+  <!-- project name="log"    remote="revel-master" path="src/github.com/revel/log"     groups="core,all" / -->
+  <project name="compress"    remote="revel-master" path="src/github.com/revel/compress"     groups="core,all" />
+  <project name="gocolorize"    remote="revel-master" path="src/github.com/revel/gocolorize"     groups="core,all" />
+  <project name="pathtree"    remote="revel-master" path="src/github.com/revel/pathtree"     groups="core,all" />
+  <project name="go-cache"    remote="revel-master" path="src/github.com/revel/go-cache"     groups="core,all" />
 
 	<!-- optional -->
-  <project name="heroku-buildpack-go-revel"  remote="revel"
+  <project name="meta"    remote="revel" path="src/github.com/revel/meta"     groups="optional,all,notdefault" />
+  <project name="redigo"    remote="revel-master" path="src/github.com/revel/redigo"     groups="optional,all,notdefault" />
+  <project name="gomemcache"    remote="revel-master" path="src/github.com/revel/gomemcache"     groups="optional,all,notdefault" />
+  <project name="heroku-buildpack-go-revel"  remote="revel-master"
            path="src/github.com/revel/heroku-buildpack-go-revel"    groups="optional,all,notdefault" />
 
-  <project name="revel.github.io"  remote="revel"
-           path="src/github.com/revel/revel.github.io"              groups="docs,all,notdefault" />
-  <project name="samples"  remote="revel" path="src/github.com/revel/samples"   groups="docs,all,notdefault" />
+  <project name="examples"  remote="revel" path="src/github.com/revel/examples"   groups="docs,all" />
   <project name="rfcs"     remote="revel" path="src/github.com/revel/rfcs"      groups="docs,all,notdefault" />
+  <project name="revel.github.io"  remote="revel" path="src/github.com/revel/revel.github.io"   groups="docs,all,notdefault" />
+  <project name="revelframework.com"  remote="revel" path="src/github.com/revel/revelframework.com"   groups="docs,all,notdefault" />
 
 </manifest>
