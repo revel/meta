@@ -16,9 +16,11 @@ milestones:
   - version: v0.14
     date: 2017-03-31
   - version: v0.15
-    date: 2017-04-30
+    date: 2017-05-02
   - version: v0.16
-    date: 2017-05-31
+    date: 2017-06-06
+  - version: v0.17
+    date: 2017-07-04
 
 labels:
   - name: effort-days
