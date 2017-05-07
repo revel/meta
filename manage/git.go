@@ -31,6 +31,7 @@ func loadGithub() error {
 	git.Projects = projects
 
 	for _, r := range config.Repos {
+		//fmt.Printf("repo: %s\n", r)
 		list, _, err := client.Issues.ListMilestones(ctx, ORG, r, &github.MilestoneListOptions{})
 		if err != nil {
 			return err
@@ -38,6 +39,7 @@ func loadGithub() error {
 
 		gr := GitRepo{}
 
+		//fmt.Printf("  milestones: %#v\n", list)
 		gr.Milestones = list
 
 		labels, err := getLabels(r)
@@ -45,6 +47,7 @@ func loadGithub() error {
 			return err
 		}
 
+		//fmt.Printf("  labels: %#v\n", labels)
 		gr.Labels = labels
 
 		git.Repos[r] = gr
