@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"time"
 
@@ -23,23 +22,21 @@ func loadGithub() error {
 
 	git = &Git{Repos: make(map[string]GitRepo)}
 
-	projects, _, err := client.Organizations.ListProjects(ctx, ORG, &github.ProjectListOptions{})
-	if err != nil {
-		return err
-	}
-
-	git.Projects = projects
+	//projects, _, err := client.Organizations.ListProjects(ctx, ORG, &github.ProjectListOptions{})
+	//if err != nil {
+	//	return err
+	//}
+	//
+	//git.Projects = projects
 
 	for _, r := range config.Repos {
-		//fmt.Printf("repo: %s\n", r)
-		list, _, err := client.Issues.ListMilestones(ctx, ORG, r, &github.MilestoneListOptions{})
+		list, _, err := client.Issues.ListMilestones(ctx, ORG, r, &github.MilestoneListOptions{State: "all"})
 		if err != nil {
 			return err
 		}
 
 		gr := GitRepo{}
 
-		//fmt.Printf("  milestones: %#v\n", list)
 		gr.Milestones = list
 
 		labels, err := getLabels(r)
@@ -47,7 +44,6 @@ func loadGithub() error {
 			return err
 		}
 
-		//fmt.Printf("  labels: %#v\n", labels)
 		gr.Labels = labels
 
 		git.Repos[r] = gr
@@ -80,7 +76,7 @@ func getLabels(repo string) ([]*github.Label, error) {
 // Git stores the information retrieved from github
 type Git struct {
 	// list of organization projects
-	Projects []*github.Project
+	//Projects []*github.Project
 	// map of repo name to repo object
 	Repos map[string]GitRepo
 }
@@ -92,15 +88,15 @@ type GitRepo struct {
 }
 
 // Project finds a project with the given name
-func (g *Git) Project(name string) *github.Project {
-	for _, p := range g.Projects {
-		if *p.Name == name {
-			return p
-		}
-	}
-
-	return nil
-}
+//func (g *Git) Project(name string) *github.Project {
+//	for _, p := range g.Projects {
+//		if *p.Name == name {
+//			return p
+//		}
+//	}
+//
+//	return nil
+//}
 
 // Milestone finds a milestone with the given repo and name
 func (g *Git) Milestone(repo, name string) *github.Milestone {
@@ -128,10 +124,10 @@ func (g *Git) Label(repo, name string) *github.Label {
 func (g *Git) String() string {
 	s := ""
 
-	s += "Projects:\n"
-	for _, p := range g.Projects {
-		s += fmt.Sprintf("  %d '%s'\n", p.ID, *p.Name)
-	}
+	//s += "Projects:\n"
+	//for _, p := range g.Projects {
+	//	s += fmt.Sprintf("  %d '%s'\n", p.ID, *p.Name)
+	//}
 
 	s += "Repos:\n"
 	for _, r := range config.Repos {
