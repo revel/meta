@@ -7,16 +7,16 @@ if [ -z "$ver" ]; then
   exit 1
 fi
 
-home=`pwd`
+work=`pwd`
 dir="/tmp/release/v${ver}"
 rm -rf ${dir}
 mkdir -p ${dir}
 
 cd ${dir}
 
-cat <<EOF > CURRENT
+cat <<EOF > CONFIG
 ver=${ver}
-home=${home}
+work=${work}
 dir=${dir}
 src=${dir}/go/src/github.com/revel
 min="go1.7"
@@ -37,14 +37,14 @@ deps+=" golang.org/x/crypto/bcrypt"
 
 tests="booking chat"
 
-export dir src min date repos deps tests
+export dir src min date repos deps tests work
 EOF
 
-source CURRENT
-source $home/common.sh
+source CONFIG
+source ${work}/common.sh
 
 export GOPATH=${dir}/go
-export PATH=$GOPATH/bin:$PATH
+export PATH=${GOPATH}/bin:$PATH
 
 mkdir -p ${dir}/go/{bin,pkg,src}
 mkdir -p ${src}
@@ -71,8 +71,6 @@ update_version ${src}/revel/version.go ${ver} ${date} ${min}
 update_readme ${src}/revel/README.md ${ver} ${date}
 update_changelog ${src}/revel/CHANGELOG.md
 
-git -C ${src}/revel add .
-
 for d in ${deps}; do
   echo getting ${d}
   go get -u ${d}
@@ -83,4 +81,5 @@ go install github.com/revel/cmd/revel
 
 revel version
 
+git -C ${src}/revel add .
 git --no-pager -C ${src}/revel diff --staged
