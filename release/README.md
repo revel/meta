@@ -58,9 +58,15 @@
     * (?) add changelog notes to releases page (not sure if I can do this automatically)
     * merge release branch to master
     * merge master branch to develop
-    * update version in develop to next version (prompt?)
+    * update version in develop to next version
         * release: v0.15.0
         * next version: v0.16.0-dev
     * commit new version to develop
+    
+* run `push.sh`, this will:
+    * push all of the commits, branches, tags
+    * makes the release LIVE
+    
+* `notify.sh` ?  
     * send notifications? (not sure how / where... will probably need something other than bash script)
 
