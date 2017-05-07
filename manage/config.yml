@@ -3,6 +3,7 @@ repos:
   - cmd
   - modules
   - examples
+  - meta
 
 project:
   columns:
