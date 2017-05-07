@@ -1,6 +1,8 @@
 #!/bin/bash -ex
 
 source CONFIG
+
+cd ${dir}
 source ${work}/common.sh
 
 export GOPATH=${dir}/go
@@ -16,3 +18,5 @@ for e in ${tests}; do
     echo "# revel test github.com/revel/examples/${e}"
     revel test github.com/revel/examples/${e}
 done
+
+echo "# tests passed. no errors."

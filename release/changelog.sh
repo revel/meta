@@ -1,6 +1,7 @@
 #!/bin/bash -ex
 
 source CONFIG
+cd ${dir}
 source ${work}/common.sh
 
 export GOPATH=${dir}/go

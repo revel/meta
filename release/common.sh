@@ -45,6 +45,7 @@ function update_readme() {
 
 function update_changelog() {
     file=$1
+    cd ${work}
     ${work}/changelog.sh > ${file}.new
     if [ -e "${file}" ]; then
         cat ${file} | grep -v ^"# CHANGELOG" >> ${file}.new

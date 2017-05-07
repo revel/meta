@@ -13,8 +13,6 @@ dir="/tmp/release/v${ver}"
 rm -rf ${dir}
 mkdir -p ${dir}
 
-cd ${dir}
-
 cat <<EOF > CONFIG
 ver=${ver}
 work=${work}
@@ -45,6 +43,8 @@ export dir src min date repos deps tests work
 EOF
 
 source CONFIG
+
+cd ${dir}
 source ${work}/common.sh
 
 export GOPATH=${dir}/go
@@ -61,22 +61,20 @@ for r in ${repos}; do
 
     if [ "${develop}" != "develop" ]; then
         git -C ${src}/${r} checkout develop
-        # if we're testing, make sure the develop branch exists
+        # if we're testing, make sure the testing develop branch exists
         git -C ${src}/${r} checkout -b ${develop} || true
+    fi
+
+    if [ "${master}" != "master" ]; then
+        git -C ${src}/${r} checkout master
+        # if we're testing, make sure the testing master branch exists
+        git -C ${src}/${r} checkout -b ${master} || true
     fi
 
     echo ">>> ${r} <<<"
     git -C ${src}/${r} checkout ${develop}
-    git -C ${src}/${r} merge master
+    git -C ${src}/${r} merge ${master}
     git -C ${src}/${r} checkout -b ${release}
-
-    if [ "${master}" != "master" ]; then
-        git-C ${src}/${r} checkout master
-        # if we're testing, make sure the destination branch exists
-        git -C ${src}/${r} checkout -b ${master} || true
-        # after creating branch, put us back on release branch
-        git -C ${src}/${r} checkout ${release}
-    fi
 done
 
 cd ${dir}

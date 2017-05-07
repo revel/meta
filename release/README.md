@@ -33,12 +33,14 @@
 
 ## Process
 
-* run `prepare.sh`, this will:
-    * checkout everything into a tmp working directory
-    * ensure that develop is up to date with master (git merge master)
-    * create the release branch from develop
-    * update the `revel/revel` changelog, readme, and version.go
-    * update the `revel/revel.github.io` version
+    # prepare.sh \<version\> \<min golang version\>
+    prepare.sh 0.15.0 1.7
+
+* checkout everything into a tmp working directory
+* ensure that develop is up to date with master (git merge master)
+* create the release branch from develop
+* update the `revel/revel` changelog, readme, and version.go
+* update the `revel/revel.github.io` version
 
 * make updates to the repos
     * this is our chance to make any final changes before it goes to master
