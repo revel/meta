@@ -12,9 +12,9 @@ echo "## v${ver}"
 echo
 
 for r in ${repos}; do
-    echo "[[$r](https://github.com/revel/$r)]"
+    echo "[[revel/$r](https://github.com/revel/$r)]"
     echo
-    lines=$(git --no-pager -C ${src}/${r} log --oneline master..develop)
+    lines=$(git --no-pager -C ${src}/${r} log --oneline ${master}..${develop})
     if [ -z "$lines" ]; then
         echo "* no changes"
     else

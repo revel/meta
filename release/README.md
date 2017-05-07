@@ -1,8 +1,6 @@
 # Release Scripts
 
-`clean.sh`
-
-* cleans up directory (don't think this is necessary anymore)
+## Scripts
 
 `common.sh`
 
@@ -32,3 +30,35 @@
 * send notifications?
 * merge from master -> develop
 * close milestone on github?
+
+## Process
+
+* run `prepare.sh`, this will:
+    * checkout everything into a tmp working directory
+    * ensure that develop is up to date with master (git merge master)
+    * create the release branch from develop
+    * update the `revel/revel` changelog, readme, and version.go
+    * update the `revel/revel.github.io` version
+
+* make updates to the repos
+    * this is our chance to make any final changes before it goes to master
+    * manually tweak the changelog
+    * add any README updates
+
+* run `test.sh`, this will:
+    * execute `go test` on `revel`, `cmd/revel`, `config`, `cron`
+    * execute `revel test` on `examples/booking` and `examples/chat`
+    * verify that everything passed (the script will fail if any exit non-zero)
+    
+* run `release.sh`, this will:
+    * commit changes on `revel/revel`, `revel/revel.github.io`
+    * create release tag (on all repos)
+    * (?) add changelog notes to releases page (not sure if I can do this automatically)
+    * merge release branch to master
+    * merge master branch to develop
+    * update version in develop to next version (prompt?)
+        * release: v0.15.0
+        * next version: v0.16.0-dev
+    * commit new version to develop
+    * send notifications? (not sure how / where... will probably need something other than bash script)
+

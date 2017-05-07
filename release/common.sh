@@ -20,16 +20,27 @@ const (
 	BuildDate = "${date}"
 
 	// MinimumGoVersion minimum required Go version for Revel
-	MinimumGoVersion = ">= ${min}"
+	MinimumGoVersion = ">= go${min}"
 )
 EOF
+}
+
+function update_web() {
+    file=$1
+    ver=$2
+    date=$3
+    min=$4
+    sed -i".old" -e "s/revel:.*/revel: ${ver}/" ${file} && \
+        sed -i".old" -e "s/golang:.*/golang: ${min}+/" ${file} && \
+        sed -i".old" -e "s/date:.*/date: ${date}/" ${file} && \
+        rm ${file}.old
 }
 
 function update_readme() {
     file=$1
     ver=$2
     date=$3
-    sed -i".old" "s/Current\ Version.*/Current\ Version: ${ver} \(${date}\)/" ${file} && rm ${file}.old
+    sed -i".old" -e "s/Current\ Version.*/Current\ Version: ${ver} \(${date}\)/" ${file} && rm ${file}.old
 }
 
 function update_changelog() {
