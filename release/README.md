@@ -63,7 +63,7 @@
 * execute `revel test` on `examples/booking` and `examples/chat`
 * verify that everything passed (the script will fail if any exit non-zero)
     
-#### ./release.sh <next version>
+#### ./release.sh \<next version\>
 
 * commit changes on `revel/revel`, `revel/revel.github.io`
 * create release tag (on all repos)
