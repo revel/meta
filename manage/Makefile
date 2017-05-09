@@ -1,9 +1,12 @@
 BINARY=manage
 
 run: deps build
-	./manage
+	./$(BINARY)
 
-build: $(BINARY)
+releases: deps build
+	./$(BINARY) releases
+
+build: clean $(BINARY)
 
 clean:
 	rm -rf $(BINARY)

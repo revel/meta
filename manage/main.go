@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 
@@ -19,9 +20,13 @@ var (
 	client *github.Client
 	config *Config
 	git    *Git
+	action string
 )
 
 func init() {
+	flag.Parse()
+	action = flag.Arg(0)
+
 	if err := loadConfig(); err != nil {
 		log.Fatalf("error loading config: %s", err)
 	}
@@ -34,7 +39,25 @@ func init() {
 func main() {
 	//fmt.Printf("config: %#v\n", config)
 	//fmt.Printf(git.String())
+	switch a := action; a {
+	case "releases":
+		releases()
+	default:
+		update()
+	}
+}
 
+func releases() {
+	for _, r := range git.Releases {
+		login := ""
+		if r.Author != nil {
+			login = "@" + *r.Author.Login + " released this "
+		}
+		fmt.Printf("# %s\n%son %s\n\n%s\n\n", *r.TagName, login, r.CreatedAt.Format("2006-01-02"), *r.Body)
+	}
+}
+
+func update() {
 	// disabling this for now...
 	// the GitHub Org Projects do not work very well.
 	// using waffle.io instead.

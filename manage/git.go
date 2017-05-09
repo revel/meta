@@ -8,6 +8,19 @@ import (
 	"github.com/google/go-github/github"
 )
 
+// Git stores the information retrieved from github
+type Git struct {
+	Projects []*github.Project           // list of organization projects
+	Repos    map[string]GitRepo          // map of repo name to repo object
+	Releases []*github.RepositoryRelease // list of releases for revel/revel
+}
+
+// GitRepo stores the repo information from github
+type GitRepo struct {
+	Milestones []*github.Milestone
+	Labels     []*github.Label
+}
+
 func loadGithub() error {
 	username := "shawncatz"
 	password := os.Getenv("GITHUB_TOKEN")
@@ -22,12 +35,12 @@ func loadGithub() error {
 
 	git = &Git{Repos: make(map[string]GitRepo)}
 
-	//projects, _, err := client.Organizations.ListProjects(ctx, ORG, &github.ProjectListOptions{})
-	//if err != nil {
-	//	return err
-	//}
-	//
-	//git.Projects = projects
+	projects, _, err := client.Organizations.ListProjects(ctx, ORG, &github.ProjectListOptions{})
+	if err != nil {
+		return err
+	}
+
+	git.Projects = projects
 
 	for _, r := range config.Repos {
 		list, _, err := client.Issues.ListMilestones(ctx, ORG, r, &github.MilestoneListOptions{State: "all"})
@@ -47,6 +60,11 @@ func loadGithub() error {
 		gr.Labels = labels
 
 		git.Repos[r] = gr
+	}
+
+	git.Releases, _, err = client.Repositories.ListReleases(ctx, ORG, "revel", &github.ListOptions{})
+	if err != nil {
+		return err
 	}
 
 	return nil
@@ -71,20 +89,6 @@ func getLabels(repo string) ([]*github.Label, error) {
 	}
 
 	return out, nil
-}
-
-// Git stores the information retrieved from github
-type Git struct {
-	// list of organization projects
-	//Projects []*github.Project
-	// map of repo name to repo object
-	Repos map[string]GitRepo
-}
-
-// GitRepo stores the repo information from github
-type GitRepo struct {
-	Milestones []*github.Milestone
-	Labels     []*github.Label
 }
 
 // Project finds a project with the given name
