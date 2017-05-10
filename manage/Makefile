@@ -6,6 +6,9 @@ run: deps build
 releases: deps build
 	./$(BINARY) releases
 
+issues: deps build
+	./$(BINARY) issues v0.16
+
 build: clean $(BINARY)
 
 clean:

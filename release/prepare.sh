@@ -30,9 +30,16 @@ for r in ${repos}; do
     fi
 
     echo ">>> ${r} <<<"
-    git -C ${src}/${r} checkout ${develop}
-    git -C ${src}/${r} merge ${master}
-    git -C ${src}/${r} checkout -b ${release}
+    if [ "${r}" = "revel.github.io" ]; then
+        # website doesn't use develop branch
+        git -C ${src}/${r} checkout ${master}
+        git -C ${src}/${r} checkout -b ${release}
+    else
+        # everything else uses develop branch
+        git -C ${src}/${r} checkout ${develop}
+        git -C ${src}/${r} merge ${master}
+        git -C ${src}/${r} checkout -b ${release}
+    fi
 done
 
 cd ${dir}
@@ -40,7 +47,8 @@ cd ${dir}
 update_version ${src}/revel/version.go ${ver} ${date} ${min}
 update_web ${src}/revel.github.io/_data/version.yaml ${ver} ${date} ${min}
 update_readme ${src}/revel/README.md ${ver} ${date}
-update_changelog ${src}/revel/CHANGELOG.md
+# TODO: come up with a better changelog
+#update_changelog ${src}/revel/CHANGELOG.md
 
 for d in ${deps}; do
   echo getting ${d}

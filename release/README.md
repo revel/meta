@@ -30,7 +30,6 @@
 
 `release.sh`
 
-* not written yet.
 * should merge to master
 * send notifications?
 * merge from master -> develop

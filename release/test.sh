@@ -8,10 +8,10 @@ source ${work}/common.sh
 export GOPATH=${dir}/go
 export PATH=$GOPATH/bin:$PATH
 
-for r in revel cmd/revel config cron; do
+for r in revel cmd/revel config cron; do #  modules/csrf/app
     cd ${src}/${r}
     echo "# go test ${r}"
-    go test -v
+    go test -v ./...
 done
 
 for e in ${tests}; do

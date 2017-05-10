@@ -7,6 +7,8 @@ import (
 	"log"
 
 	"github.com/google/go-github/github"
+	"os"
+	"strings"
 )
 
 // FILE is the location of the config.yml file
@@ -40,10 +42,38 @@ func main() {
 	//fmt.Printf("config: %#v\n", config)
 	//fmt.Printf(git.String())
 	switch a := action; a {
+	case "issues":
+		issues(flag.Arg(1))
 	case "releases":
 		releases()
 	default:
 		update()
+	}
+}
+
+func issues(milestone string) {
+	if milestone == "" {
+		fmt.Println("must specify milestone")
+		os.Exit(1)
+	}
+
+	fmt.Printf("collecting milestone: %s\n", milestone)
+
+	for _, r := range config.Repos {
+		list, err := loadMilestone(r, milestone)
+		if err != nil {
+			fmt.Errorf("error: %s", err)
+		}
+
+		for _, i := range list {
+			labels := []string{}
+			for _, l := range i.Labels {
+				labels = append(labels, *l.Name)
+			}
+			fmt.Printf("%s/%s#%d %s %s [%s]\n", ORG, r, *i.Number, *i.State, *i.Title, strings.Join(labels, ", "))
+		}
+
+		fmt.Println()
 	}
 }
 

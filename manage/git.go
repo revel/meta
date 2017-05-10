@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	"fmt"
 	"github.com/google/go-github/github"
 )
 
@@ -68,6 +69,26 @@ func loadGithub() error {
 	}
 
 	return nil
+}
+
+func loadMilestone(repo, milestone string) ([]*github.Issue, error) {
+	id := ""
+	for _, m := range git.Repos[repo].Milestones {
+		if *m.Title == milestone {
+			id = fmt.Sprintf("%d", *m.Number)
+			break
+		}
+	}
+
+	if id == "" {
+		return nil, fmt.Errorf("could not find number for milestone %s in repo %s", milestone, repo)
+	}
+
+	issues, _, err := client.Issues.ListByRepo(ctx, ORG, repo, &github.IssueListByRepoOptions{Milestone: id, State: "closed"})
+	if err != nil {
+		return nil, err
+	}
+	return issues, nil
 }
 
 // getLabels returns a combined slice of labels from paged responses

@@ -20,8 +20,8 @@ dir=${dir}
 src=${dir}/go/src/github.com/revel
 min="${min}"
 date="$(date +'%Y-%m-%d')"
-master="testing"
-develop="testdev"
+master="master"
+develop="develop"
 release="release/v${ver}"
 
 repos="revel cmd config modules cron examples revel.github.io heroku-buildpack-go-revel"
@@ -36,6 +36,9 @@ deps+=" gopkg.in/fsnotify.v1"
 deps+=" github.com/go-gorp/gorp"
 deps+=" github.com/mattn/go-sqlite3"
 deps+=" golang.org/x/crypto/bcrypt"
+deps+=" github.com/bradfitz/gomemcache/memcache"
+deps+=" github.com/garyburd/redigo/redis"
+deps+=" github.com/robfig/go-cache"
 
 tests="booking chat"
 
