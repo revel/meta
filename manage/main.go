@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 
 	"github.com/google/go-github/github"
+	"os"
+	"strings"
 )
 
 // FILE is the location of the config.yml file
@@ -19,9 +22,13 @@ var (
 	client *github.Client
 	config *Config
 	git    *Git
+	action string
 )
 
 func init() {
+	flag.Parse()
+	action = flag.Arg(0)
+
 	if err := loadConfig(); err != nil {
 		log.Fatalf("error loading config: %s", err)
 	}
@@ -34,7 +41,53 @@ func init() {
 func main() {
 	//fmt.Printf("config: %#v\n", config)
 	//fmt.Printf(git.String())
+	switch a := action; a {
+	case "issues":
+		issues(flag.Arg(1))
+	case "releases":
+		releases()
+	default:
+		update()
+	}
+}
 
+func issues(milestone string) {
+	if milestone == "" {
+		fmt.Println("must specify milestone")
+		os.Exit(1)
+	}
+
+	fmt.Printf("collecting milestone: %s\n", milestone)
+
+	for _, r := range config.Repos {
+		list, err := loadMilestone(r, milestone)
+		if err != nil {
+			fmt.Errorf("error: %s", err)
+		}
+
+		for _, i := range list {
+			labels := []string{}
+			for _, l := range i.Labels {
+				labels = append(labels, *l.Name)
+			}
+			fmt.Printf("%s/%s#%d %s %s [%s]\n", ORG, r, *i.Number, *i.State, *i.Title, strings.Join(labels, ", "))
+		}
+
+		fmt.Println()
+	}
+}
+
+func releases() {
+	for _, r := range git.Releases {
+		login := ""
+		if r.Author != nil {
+			login = "@" + *r.Author.Login + " released this "
+		}
+		fmt.Printf("# %s\n%son %s\n\n%s\n\n", *r.TagName, login, r.CreatedAt.Format("2006-01-02"), *r.Body)
+	}
+}
+
+func update() {
 	// disabling this for now...
 	// the GitHub Org Projects do not work very well.
 	// using waffle.io instead.
