@@ -2,12 +2,25 @@ package main
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"time"
 
+	"fmt"
 	"github.com/google/go-github/github"
 )
+
+// Git stores the information retrieved from github
+type Git struct {
+	Projects []*github.Project           // list of organization projects
+	Repos    map[string]GitRepo          // map of repo name to repo object
+	Releases []*github.RepositoryRelease // list of releases for revel/revel
+}
+
+// GitRepo stores the repo information from github
+type GitRepo struct {
+	Milestones []*github.Milestone
+	Labels     []*github.Label
+}
 
 func loadGithub() error {
 	username := "shawncatz"
@@ -31,7 +44,7 @@ func loadGithub() error {
 	git.Projects = projects
 
 	for _, r := range config.Repos {
-		list, _, err := client.Issues.ListMilestones(ctx, ORG, r, &github.MilestoneListOptions{})
+		list, _, err := client.Issues.ListMilestones(ctx, ORG, r, &github.MilestoneListOptions{State: "all"})
 		if err != nil {
 			return err
 		}
@@ -50,7 +63,32 @@ func loadGithub() error {
 		git.Repos[r] = gr
 	}
 
+	git.Releases, _, err = client.Repositories.ListReleases(ctx, ORG, "revel", &github.ListOptions{})
+	if err != nil {
+		return err
+	}
+
 	return nil
+}
+
+func loadMilestone(repo, milestone string) ([]*github.Issue, error) {
+	id := ""
+	for _, m := range git.Repos[repo].Milestones {
+		if *m.Title == milestone {
+			id = fmt.Sprintf("%d", *m.Number)
+			break
+		}
+	}
+
+	if id == "" {
+		return nil, fmt.Errorf("could not find number for milestone %s in repo %s", milestone, repo)
+	}
+
+	issues, _, err := client.Issues.ListByRepo(ctx, ORG, repo, &github.IssueListByRepoOptions{Milestone: id, State: "closed"})
+	if err != nil {
+		return nil, err
+	}
+	return issues, nil
 }
 
 // getLabels returns a combined slice of labels from paged responses
@@ -74,30 +112,16 @@ func getLabels(repo string) ([]*github.Label, error) {
 	return out, nil
 }
 
-// Git stores the information retrieved from github
-type Git struct {
-	// list of organization projects
-	Projects []*github.Project
-	// map of repo name to repo object
-	Repos map[string]GitRepo
-}
-
-// GitRepo stores the repo information from github
-type GitRepo struct {
-	Milestones []*github.Milestone
-	Labels     []*github.Label
-}
-
 // Project finds a project with the given name
-func (g *Git) Project(name string) *github.Project {
-	for _, p := range g.Projects {
-		if *p.Name == name {
-			return p
-		}
-	}
-
-	return nil
-}
+//func (g *Git) Project(name string) *github.Project {
+//	for _, p := range g.Projects {
+//		if *p.Name == name {
+//			return p
+//		}
+//	}
+//
+//	return nil
+//}
 
 // Milestone finds a milestone with the given repo and name
 func (g *Git) Milestone(repo, name string) *github.Milestone {
@@ -125,10 +149,10 @@ func (g *Git) Label(repo, name string) *github.Label {
 func (g *Git) String() string {
 	s := ""
 
-	s += "Projects:\n"
-	for _, p := range g.Projects {
-		s += fmt.Sprintf("  %d '%s'\n", p.ID, *p.Name)
-	}
+	//s += "Projects:\n"
+	//for _, p := range g.Projects {
+	//	s += fmt.Sprintf("  %d '%s'\n", p.ID, *p.Name)
+	//}
 
 	s += "Repos:\n"
 	for _, r := range config.Repos {
