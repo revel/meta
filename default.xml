@@ -33,7 +33,7 @@
            path="src/github.com/revel/heroku-buildpack-go-revel"    groups="optional,all,notdefault" />
 
   <project name="examples"  remote="revel" path="src/github.com/revel/examples"   groups="docs,all" />
-  <project name="rfcs"     remote="revel" path="src/github.com/revel/rfcs"      groups="docs,all,notdefault" />
+  <project name="rfcs"     remote="revel-master" path="src/github.com/revel/rfcs"      groups="docs,all,notdefault" />
   <project name="revel.github.io"  remote="revel" path="src/github.com/revel/revel.github.io"   groups="docs,all,notdefault" />
   <project name="revelframework.com"  remote="revel" path="src/github.com/revel/revelframework.com"   groups="docs,all,notdefault" />
 
