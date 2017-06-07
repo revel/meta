@@ -19,8 +19,8 @@ export PATH=$GOPATH/bin:$PATH
 for r in ${repos}; do
     git -C ${src}/${r} checkout ${release}
     git -C ${src}/${r} add .
-    git -C ${src}/${r} ci -m "release v${ver}" || true # could be empty
-    git -C ${src}/${r} tag v${ver}
+    git -C ${src}/${r} commit -m "release v${ver}" || true # could be empty
+    git -C ${src}/${r} tag v${ver} || true
 
     git -C ${src}/${r} checkout ${master}
     git -C ${src}/${r} merge release/v${ver}
@@ -44,7 +44,7 @@ for r in ${repos}; do
     if [ "${r}" != "revel.github.io" ]; then
         # website doesn't use develop branch
         git -C ${src}/${r} add .
-        git -C ${src}/${r} ci -m "develop v${next}-dev" || true # could be empty
+        git -C ${src}/${r} commit -m "develop v${next}-dev" || true # could be empty
     fi
 done
 
