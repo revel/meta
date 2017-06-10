@@ -24,7 +24,7 @@ master="master"
 develop="develop"
 release="release/v${ver}"
 
-repos="revel cmd config modules cron examples revel.github.io heroku-buildpack-go-revel"
+repos="revel cmd config modules cron examples heroku-buildpack-go-revel"
 
 deps=""
 deps+=" github.com/agtorre/gocolorize"
