@@ -27,6 +27,7 @@
 
 	<!-- optional -->
   <project name="meta"    remote="revel" path="src/github.com/revel/meta"     groups="optional,all,notdefault" />
+  <project name="wiki"    remote="revel-master" path="src/github.com/revel/revel.wiki"     groups="optional,all,notdefault" />
   <project name="redigo"    remote="revel-master" path="src/github.com/revel/redigo"     groups="optional,all,notdefault" />
   <project name="gomemcache"    remote="revel-master" path="src/github.com/revel/gomemcache"     groups="optional,all,notdefault" />
   <project name="heroku-buildpack-go-revel"  remote="revel-master"
