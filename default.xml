@@ -16,6 +16,7 @@
   <project name="revel"   remote="revel" path="src/github.com/revel/revel" groups="core,all" />
   <project name="modules" remote="revel" path="src/github.com/revel/modules" groups="core,all" />
   <project name="cmd"     remote="revel" path="src/github.com/revel/cmd"   groups="core,all" />
+  <project name="cli"     remote="revel" path="src/github.com/revel/cli"   groups="core,all" />
   <project name="cron"    remote="revel" path="src/github.com/revel/cron"     groups="core,all" />
   <project name="config"    remote="revel" path="src/github.com/revel/config"     groups="core,all" />
   <project name="fsnotify"    remote="revel-master" path="src/github.com/revel/fsnotify"     groups="core,all" />
@@ -27,6 +28,7 @@
 
 	<!-- optional -->
   <project name="meta"    remote="revel" path="src/github.com/revel/meta"     groups="optional,all,notdefault" />
+  <project name="wiki"    remote="revel-master" path="src/github.com/revel/revel.wiki"     groups="optional,all,notdefault" />
   <project name="redigo"    remote="revel-master" path="src/github.com/revel/redigo"     groups="optional,all,notdefault" />
   <project name="gomemcache"    remote="revel-master" path="src/github.com/revel/gomemcache"     groups="optional,all,notdefault" />
   <project name="heroku-buildpack-go-revel"  remote="revel-master"
