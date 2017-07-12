@@ -13,14 +13,17 @@ echo "## v${ver}"
 echo
 
 for r in ${repos}; do
-    echo "[[revel/$r](https://github.com/revel/$r)]"
-    echo
-    lines=$(git --no-pager -C ${src}/${r} log --oneline ${master}..${develop})
-    if [ -z "$lines" ]; then
-        echo "* no changes"
-    else
-        while read line; do echo "* $line"; done <<< "$lines"
+    if [ "${r}" != "revel.github.io" ]; then
+        # website doesn't use develop branch
+        echo "[[revel/$r](https://github.com/revel/$r)]"
+        echo
+        lines=$(git --no-pager -C ${src}/${r} log --oneline ${master}..${develop})
+        if [ -z "$lines" ]; then
+            echo "* no changes"
+        else
+            while read line; do echo "* $line"; done <<< "$lines"
+        fi
+        echo
     fi
-    echo
 done
 

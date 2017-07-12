@@ -62,6 +62,7 @@
 * execute `revel test` on `examples/booking` and `examples/chat`
 * verify that everything passed (the script will fail if any exit non-zero)
     
+
 #### ./release.sh \<next version\>
 
 * commit changes on `revel/revel`, `revel/revel.github.io`
@@ -74,12 +75,19 @@
     * next version: v0.16.0-dev
 * commit new version to develop
 
+#### ./changelog.sh > changes.md
+
+* Echo commit messages to the changes.md
+
+
 #### ./push.sh
 
 * push all of the commits, branches, tags
 * makes the release LIVE
    
+
 #### notify?
 
-* send notifications? (not sure how / where... will probably need something other than bash script)
+* send notifications
+* Massage changes.md and distribute to google groups and others
 
