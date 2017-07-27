@@ -40,7 +40,27 @@ deps+=" github.com/bradfitz/gomemcache/memcache"
 deps+=" github.com/garyburd/redigo/redis"
 deps+=" github.com/robfig/go-cache"
 
-tests="booking chat"
+# From gorm module
+deps+=" github.com/jinzhu/gorm"
+deps+=" github.com/go-sql-driver/mysql"
+deps+=" github.com/lib/pq"
 
+# From pongo2 module, would be nice to remove if possible (it allows you to store something in current thread)
+deps+=" github.com/tylerb/gls"
+deps+=" github.com/flosch/pongo2"
+# From ace template module
+deps+=" github.com/yosssi/ace"
+
+# From server engine fasthttp
+deps+=" github.com/valyala/fasthttp"
+# From server engine newrelic
+deps+=" github.com/newrelic/go-agent"
+
+# From examples
+deps+=" github.com/mrjones/oauth"
+deps+=" golang.org/x/oauth2"
+
+tests="booking chat"
+echo deps
 export dir src min date repos deps tests work
 EOF
