@@ -34,3 +34,9 @@ for r in ${repos}; do
     fi
 
 done
+# Fetch dependent repos
+for d in ${deps}; do
+  echo getting ${d}
+  go get -u ${d}
+done
+

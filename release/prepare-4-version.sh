@@ -16,11 +16,6 @@ update_readme ${src}/revel/README.md ${ver} ${date}
 # TODO: come up with a better changelog
 #update_changelog ${src}/revel/CHANGELOG.md
 
-for d in ${deps}; do
-  echo getting ${d}
-  go get -u ${d}
-done
-
 go build github.com/revel/revel
 go install github.com/revel/cmd/revel
 

@@ -11,8 +11,13 @@ export PATH=$GOPATH/bin:$PATH
 for r in revel cmd/revel config cron; do #  modules/csrf/app
     cd ${src}/${r}
     echo "# go test ${r}"
-    go test -v ./...
+    go test -v ./
 done
+
+go build github.com/revel/revel
+go install github.com/revel/cmd/revel
+
+revel version
 
 for e in ${tests}; do
     echo "# revel test github.com/revel/examples/${e}"
