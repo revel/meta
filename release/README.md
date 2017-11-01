@@ -40,6 +40,8 @@
 #### ./configure.sh  \<version\> \<min golang version\>
 
 * creates configuration file
+Example ./configure.sh v0.18.0 go1.6
+
 
 #### ./prepare.sh
 
@@ -63,6 +65,10 @@
 * verify that everything passed (the script will fail if any exit non-zero)
     
 
+#### ./changelog.sh > changes.md
+
+* Echo commit messages to the changes.md
+
 #### ./release.sh \<next version\>
 
 * commit changes on `revel/revel`, `revel/revel.github.io`
@@ -74,10 +80,6 @@
     * release: v0.15.0
     * next version: v0.16.0-dev
 * commit new version to develop
-
-#### ./changelog.sh > changes.md
-
-* Echo commit messages to the changes.md
 
 
 #### ./push.sh
@@ -91,3 +93,57 @@
 * send notifications
 * Massage changes.md and distribute to google groups and others
 
+#### ./godeps.sh
+* Generate the \<version\>.godeps file for all packages
+
+#### Final Steps
+* Test in new folder 
+  * mkdir test
+  * export GOPATH=$PWD
+  * gdm restore -f \<version\>.godeps
+  * go build github.com/revel/cmd/revel
+  *  ./revel version
+DEBUG 07:02:47  revel  server.go:27: RegisterServerEngine: Registered engine   section=server name=go 
+~
+~ revel! http://revel.github.io
+~
+Version(s):
+   Revel v0.18-dev (2017-07-14)
+   go1.8.3 linux/amd64
+
+* Commit and push the godeps file
+
+## RC Process
+
+#### ./configure.sh  \<version\> \<min golang version\>
+
+* creates configuration file
+
+#### ./prepare-1-clone.sh
+
+* Clones all repos
+
+#### ./test.sh
+
+* execute `go test` on `revel`, `cmd/revel`, `config`, `cron`
+* execute `revel test` on `examples/booking` and `examples/chat`
+* verify that everything passed (the script will fail if any exit non-zero)
+
+#### ./godeps.sh
+* Generate the \<version\>.godeps file for all packages
+
+#### Final Steps
+* Test in new folder 
+  * mkdir test
+  * export GOPATH=$PWD
+  * gdm restore -f \<version\>.godeps
+  * go build github.com/revel/cmd/revel
+  *  ./revel version
+DEBUG 07:02:47  revel  server.go:27: RegisterServerEngine: Registered engine   section=server name=go 
+~
+~ revel! http://revel.github.io
+~
+Version(s):
+   Revel v0.18-dev (2017-07-14)
+   go1.8.3 linux/amd64
+* Commit and push the godeps file

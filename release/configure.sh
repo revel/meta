@@ -38,7 +38,22 @@ deps+=" github.com/mattn/go-sqlite3"
 deps+=" golang.org/x/crypto/bcrypt"
 deps+=" github.com/bradfitz/gomemcache/memcache"
 deps+=" github.com/garyburd/redigo/redis"
+deps+=" github.com/go-stack/stack"
+deps+=" github.com/revel/log15"
+deps+=" github.com/xeonx/timeago"
+deps+=" gopkg.in/natefinch/lumberjack.v2"
+
+# Casbin module auth
+deps+=" github.com/casbin/casbin"
+
+# GORP module
+deps+=" gopkg.in/Masterminds/squirrel.v1"
+deps+=" gopkg.in/gorp.v2"
+
+# Remove github.com/robfig/go-cache release v0.20.0
 deps+=" github.com/robfig/go-cache"
+deps+=" github.com/patrickmn/go-cache"
+
 
 # From gorm module
 deps+=" github.com/jinzhu/gorm"
@@ -60,7 +75,7 @@ deps+=" github.com/newrelic/go-agent"
 deps+=" github.com/mrjones/oauth"
 deps+=" golang.org/x/oauth2"
 
-tests="booking chat"
+tests="booking chat orm/gorm"
 echo deps
 export dir src min date repos deps tests work
 EOF

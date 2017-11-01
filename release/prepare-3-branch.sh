@@ -24,12 +24,12 @@ for r in ${repos}; do
         git -C ${src}/${r} checkout -b ${master} || true
     fi
     echo ">>> ${r} <<<"
-    if [ "${r}" = "revel.github.io" ]; then
-        # website doesn't use develop branch
-        git -C ${src}/${r} checkout -b ${release}
-    else
+#     if [ "${r}" = "revel.github.io" ]; then
+#         # website doesn't use develop branch
+#         git -C ${src}/${r} checkout -b ${release}
+#     else
         # everything else uses develop branch
         git -C ${src}/${r} checkout -b ${release}
-    fi
+#     fi
 done
 
