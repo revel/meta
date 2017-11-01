@@ -43,6 +43,13 @@ deps+=" github.com/revel/log15"
 deps+=" github.com/xeonx/timeago"
 deps+=" gopkg.in/natefinch/lumberjack.v2"
 
+# Casbin module auth
+deps+=" github.com/casbin/casbin"
+
+# GORP module
+deps+=" gopkg.in/Masterminds/squirrel.v1"
+deps+=" gopkg.in/gorp.v2"
+
 # Remove github.com/robfig/go-cache release v0.20.0
 deps+=" github.com/robfig/go-cache"
 deps+=" github.com/patrickmn/go-cache"

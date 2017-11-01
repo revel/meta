@@ -40,6 +40,8 @@
 #### ./configure.sh  \<version\> \<min golang version\>
 
 * creates configuration file
+Example ./configure.sh v0.18.0 go1.6
+
 
 #### ./prepare.sh
 
@@ -63,6 +65,10 @@
 * verify that everything passed (the script will fail if any exit non-zero)
     
 
+#### ./changelog.sh > changes.md
+
+* Echo commit messages to the changes.md
+
 #### ./release.sh \<next version\>
 
 * commit changes on `revel/revel`, `revel/revel.github.io`
@@ -74,10 +80,6 @@
     * release: v0.15.0
     * next version: v0.16.0-dev
 * commit new version to develop
-
-#### ./changelog.sh > changes.md
-
-* Echo commit messages to the changes.md
 
 
 #### ./push.sh

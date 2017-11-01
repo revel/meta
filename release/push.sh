@@ -16,9 +16,9 @@ for r in ${repos}; do
     git -C ${src}/${r} checkout ${master}
     git -C ${src}/${r} push origin ${master}
 
-    if [ "${r}" != "revel.github.io" ]; then
+#    if [ "${r}" != "revel.github.io" ]; then
         # website doesn't use develop branch
         git -C ${src}/${r} checkout ${develop}
         git -C ${src}/${r} push origin ${develop}
-    fi
+#    fi
 done

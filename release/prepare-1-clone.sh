@@ -25,13 +25,13 @@ for r in ${repos}; do
         git -C ${src}/${r} checkout master
     fi
     echo ">>> ${r} <<<"
-    if [ "${r}" = "revel.github.io" ]; then
-        # website doesn't use develop branch
-        git -C ${src}/${r} checkout ${master}
-    else
+#     if [ "${r}" = "revel.github.io" ]; then
+#         # website doesn't use develop branch
+#         git -C ${src}/${r} checkout ${master}
+#     else
         # everything else uses develop branch
         git -C ${src}/${r} checkout ${develop}
-    fi
+#     fi
 
 done
 # Fetch dependent repos

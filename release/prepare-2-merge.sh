@@ -16,11 +16,11 @@ cd ${src}
 for r in ${repos}; do
 
     echo ">>> ${r} <<<"
-    if [ "${r}" = "revel.github.io" ]; then
-        # website doesn't use develop branch
-        echo "Website merge skipped"
-    else
+#     if [ "${r}" = "revel.github.io" ]; then
+#         # website doesn't use develop branch
+#         echo "Website merge skipped"
+#     else
         # everything else uses develop branch
         git -C ${src}/${r} merge ${master}
-    fi
+#     fi
 done
