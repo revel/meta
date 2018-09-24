@@ -28,11 +28,9 @@ repos="revel cmd config modules cron examples revel.github.io heroku-buildpack-g
 
 deps=""
 deps+=" github.com/agtorre/gocolorize"
-deps+=" github.com/klauspost/compress/gzip"
-deps+=" github.com/klauspost/compress/zlib"
 deps+=" github.com/revel/pathtree"
 deps+=" golang.org/x/net/websocket"
-deps+=" gopkg.in/fsnotify.v1"
+deps+=" gopkg.in/fsnotify/fsnotify.v1"
 deps+=" github.com/go-gorp/gorp"
 deps+=" github.com/mattn/go-sqlite3"
 deps+=" golang.org/x/crypto/bcrypt"
@@ -42,6 +40,13 @@ deps+=" github.com/go-stack/stack"
 deps+=" github.com/revel/log15"
 deps+=" github.com/xeonx/timeago"
 deps+=" gopkg.in/natefinch/lumberjack.v2"
+deps+=" github.com/jessevdk/go-flags"
+deps+=" github.com/stretchr/testify/assert"
+
+
+# Deprecated, remove v 21
+deps+=" github.com/klauspost/compress/gzip"
+deps+=" github.com/klauspost/compress/zlib"
 
 # Casbin module auth
 deps+=" github.com/casbin/casbin"
