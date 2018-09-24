@@ -75,7 +75,7 @@ deps+=" github.com/newrelic/go-agent"
 deps+=" github.com/mrjones/oauth"
 deps+=" golang.org/x/oauth2"
 
-tests="booking chat orm/gorm"
+tests="booking chat orm/gorm upload"
 echo deps
 export dir src min date repos deps tests work
 EOF

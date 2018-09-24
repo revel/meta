@@ -13,7 +13,7 @@ echo "## v${ver}"
 echo
 
 for r in ${repos}; do
-    if [ "${r}" != "revel.github.io" ]; then
+#    if [ "${r}" != "revel.github.io" ]; then
         # website doesn't use develop branch
         echo "[[revel/$r](https://github.com/revel/$r)]"
         echo
@@ -24,6 +24,6 @@ for r in ${repos}; do
             while read line; do echo "* $line"; done <<< "$lines"
         fi
         echo
-    fi
+#    fi
 done
 
