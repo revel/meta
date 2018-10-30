@@ -42,7 +42,8 @@ deps+=" github.com/xeonx/timeago"
 deps+=" gopkg.in/natefinch/lumberjack.v2"
 deps+=" github.com/jessevdk/go-flags"
 deps+=" github.com/stretchr/testify/assert"
-
+deps+=" github.com/twinj/uuid"
+deps+=" github.com/kr/pty"
 
 # Deprecated, remove v 21
 deps+=" github.com/klauspost/compress/gzip"

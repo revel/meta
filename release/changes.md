@@ -1,99 +1,100 @@
 deps
 # CHANGELOG
 
-## v0.20.0
+## v0.21.0
 
 [[revel/revel](https://github.com/revel/revel)]
 
-* 383a5e1 Merge pull request #1370 from notzippy/develop
-* bfddb60 Modified handler to be func(typeOf revel.Event, value interface{}) (responseOf revel.EventResponse) Broke out event sending and constants into their own class
-* 9bf125f Merge pull request #1369 from notzippy/develop
-* 6c48cb0 Updated minimum GO version and modified fsnotify import
-* fdb14c8 Merge pull request #1368 from notzippy/develop
-* f65f5b1 Added some features Added hard fail REVEL_FAILURE event Added HTTP_REQUEST_CONTEXT fetch Breaking change function  `Request.Context() map[string]interface()` renamed to  `Request.Args() map[string]interface()` new function added  `Request.Context() context.Context`
-* 2cb726f Merge pull request #1367 from notzippy/develop
-* 28687af Updated travis, Fixed session test to compare on UTC times Added 5 retries for GetCustom test
-* 66f0275 Merge pull request #1366 from notzippy/develop
-* 8d67b61 Updated watcher to run updates in parallel to prevent delayed multiple compiles Updated travis to test only go 1.8 and above
-* d19c79b Incremental updates Updated logger functionality Added option to pass in mode as a JSON object. This allows execution of test cases at different then normal levels. Fixed the rendering of error messages for templates. So that they are displayed properly now Added some additional documentation and cleaned some code
-* e8bba3e Merge pull request #1224 from zuoRambo/feature/graceful-shutdown
-* b9be311 Merge pull request #1365 from revel/master
-* 5bad366 Merge pull request #1312 from lokhman/feature/better-required-validator
-* 4dd8596 Merge pull request #1333 from notzippy/json_websocket_update
-* f44841b Merge pull request #1358 from Heinoc/develop
-* cc08741 fix template_engine.go's DEBUG bug of command "revel version";
-* 427b91e Added websockets Message.Send / Message.Receive functions.
-* ec3e765 Merge pull request #1332 from notzippy/develop
-* 7f40999 Updated MIT license
-* 15b3937 Fix typos in required validator
-* 112cb29 Update required validator to validate zero-length values
-* f0f2e00 Merge pull request #1316 from notzippy/func_logger
-* 36312cf Added functional logger.
-* 4699f07 Merge pull request #1315 from Zauberstuhl/log_output
-* 3bcfd78 Remove unnecessary log output in results.go
-* 10c5484 Use reflect.DeepEqual to support not comparable types (e.g. func)
-* 6791e46 Remove time from imports
-* eb9c880 Return standardised default message
-* 4e97651 Simplify validator to support all possible object types
-* 6ac3015 develop v0.20.0-dev
-* 3b55281 GoHttpServer support graceful shutdown; add OnAppShut
-* 89b25f7 Merge branch 'master' into feature/graceful-shutdown
-* 2e5ecfa import facebookgo/grace/gracehttp to support graceful shutdown
-* b8ee27a resolve confilct
-* 61a5805 Merge remote-tracking branch 'origin/develop' into feature/graceful-shutdown
-* b59a6bd Retargets #593 and cleans up the code a bit
-* eceec1f Runtime errors fixed, signal polishing
-* b4033b5 added OnAppShutdown hook
-* 2a8a56f graceful server shutdown
-* 8656660 shutdown hooks
+* d76f3ec Merge pull request #1404 from notzippy/develop
+* e8b4839 Bug fix, not reuse controllers Moved SimpleStack into utils folder Added RevelContainer Moved controller stacks inside revelcontainer Added option to not reuse controllers via `revel.controller.reuse`
+* 08d8d9d Merge pull request #1403 from notzippy/develop
+* bf256fd Added getKeys() for the header Updated usage closes #1391
+* 842eeae Merge pull request #1401 from HaraldNordgren/go_versions
+* 12a1b90 Bump Go versions and use '.x' to always get latest minor versions
+* 7b96469 Merge pull request #1399 from notzippy/develop
+* 613a1f2 Small enhancements Added stack to errors Added stack information to router when forumlating error
+* 0610c3e Merge pull request #1397 from ptman/patch-1
+* adfd82f Fix compilation error
+* 382fb5a Merge pull request #1394 from notzippy/develop
+* a1ca909 Merge pull request #1396 from dnamsons/fix-spelling-errors
+* f6187f2 Fix spelling errors from go report
+* fba1f4b Removed deprecated loggers
+* 68a6460 Updated travis , made windows success optional
+* 5c6836e Merge pull request #1393 from notzippy/develop
+* 7033e40 Small enhancements Exposed StopServer function to public Changed session filter to use empty call
+* 2ae752b Merge pull request #1390 from notzippy/code-reformat
+* a13d702 Fix logger issue
+* 30f8c4f Merge pull request #1389 from notzippy/code-reformat
+* cd4dc58 Fixed issues with session test
+* 6ab8463 Merge pull request #1388 from notzippy/code-reformat
+* a77db07 Merge pull request #1387 from notzippy/session-engine-3
+* f760886 Merge pull request #1386 from notzippy/shutdown-update
+* b52953f Merge pull request #1385 from notzippy/template-error
+* 7ce779c Merge pull request #1382 from notzippy/session-engine-2
+* c6e2cfb Ran gofmt -s -w
+* 577ae8b Enhancement pack for next release Added session engine support, and the session cookie engine breaking change revel.Session was map[string]string now is map[string]interface{}
+* 93d7ca8 Updated test cases Updated shutdown to support windows environment Patched shutdown support to make it work through the event engine Added ENGINE_SHUTDOWN_REQUEST to events, raising this event will cause the server to shutdown Assigned Server engines to receive revel.Events Added revel.OnAppStop hooks - breaking change, was revel.OnAppShutdown Removed revel.OnAppShutdown Normalized startup / shutdown hooks into their own package
+* 47158ea Fixed template bug The template was not displaying the source code when an error occurred this fixes that
+* 4ae50af Logger Enhancement Further isolated dependencies on log 15 to just the revel_logger package All handlers are declared locally Added test cases Fixed bugs Documented rules
+* 9073a7e Merge pull request #1372 from revel/master
+* 96f1099 develop v0.21.0-dev
+* 3762042 Fix changes from other mergesAdds session engine support. Configurable session engine, register interface revel.SessionRegisterSessionEngine(f func() revel.SessionEngine, name string) Session engine is choosen from app.conf value session.engine Currently only engine type is revel-cookie. Adds the feature to store interface{} session from controller using SessionMarshal, SessionUnmarshal, SessionDelete.
 
 [[revel/cmd](https://github.com/revel/cmd)]
 
-* b606ec9 Merge pull request #138 from notzippy/develop
-* 01ccd69 Re added the requirement for the -a, without this the flags would not error out and cause issues
-* cfe5bf4 Merge pull request #137 from notzippy/develop
-* 7a4e741 Added a version file to revel/cmd Updated import path detection to make it smarter. You can now use absolute paths etc..
-* 92943b2 Merge pull request #136 from notzippy/develop
-* 69e59ef New Enhancement Added ability to create a new revel applicaiton without any sources. Automatically download all sources required
-* 5973b43 Merge pull request #135 from notzippy/develop
-* c47f447 Added message for debugging Added process state message to be returned to wait channel to help resolve the reason for the "app died" message
-* b138e35 Merge pull request #134 from notzippy/develop
-* 17459d1 Split main file Added code to split the generated main file into two separate files. This allows other code to launch the web application inline.
-* c87d53e Merge pull request #133 from notzippy/develop
-* 4d7a290 Updated readme, Updated travis
-* 7eff69f Merge pull request #130 from notzippy/develop
-* 34bc650 Added CI
-* 2c53671 Merge pull request #129 from notzippy/develop
-* 3ad381d Enhanced package and build to by default not include any source code
-* d0baaeb Initial rewrite of revel/cmd to provide vendor support and enhanced CLI options
-* d2ac018 Merge pull request #120 from lokhman/issue119
-* d0e5c79 Merge pull request #122 from notzippy/develop
-* 7e501b8 Added missed GPL license to command
-* fe56bdd Fix DefaultValidationKeys generated with wrong line for multiline check
+* facfe0e Merge pull request #159 from notzippy/develop
+* ee53d2f Patchset for 21 Added Version -u to update the checked out libaraies Enhanced new skeleton toto support http https and git schemas when cloning the skeleton repo. Enhanced version command to fetch server version from master branch Enhanced version command to update local repository if a new version exists on the server
+* 3c48e1f Merge pull request #158 from hwsoderlund/fix_compile_error
+* 19fb7d6 Fix compilation error visibility
+* 1e7b532 Merge pull request #157 from HaraldNordgren/go_versions
+* 205c652 Bump Go versions and use '.x' to always get latest patch versions
+* 3de8b8c Merge pull request #156 from notzippy/develop
+* 4a877b2 Modified run command to translate symlinks to absolute paths
+* a0bafdc Merge pull request #155 from notzippy/develop
+* cdef0b7 Added ability to readback output from command line Updated readme
+* e0d3f83 Merge pull request #153 from notzippy/develop
+* 87c9e56 Tool updates Updated tool to give more meaningful errors Added file system as an option to fetch the skeleton from
+* 554e625 Merge pull request #152 from notzippy/develop
+* 32a3f08 Allow windows to fail on travis since to address a bug on current master
+* e6e1cad Merge pull request #148 from notzippy/develop
+* 5e36cb1 Updated travis to use checkout matching branch of Revel Framework for build.
+* 8c21a56 Revel tool enhancements * run Command will choose CWD if no additional arguments are supplied * Added Revel version check, compatible lists are in model/version
+* 031fde6 Update to logger
+* 09ca80a Merge pull request #151 from lujiacn/master
+* 2d6c2ee Update build.go
 
 [[revel/config](https://github.com/revel/config)]
 
-* no changes
+* a81c410 Merge pull request #12 from revel/master
 
 [[revel/modules](https://github.com/revel/modules)]
 
-* 5b32282 Merge pull request #81 from notzippy/develop
-* cf8fce9 Missed a type change
-* f11f12d Merge pull request #80 from notzippy/develop
-* 8f290c0 Updated because of type change in Revel
-* 1a0eae9 Merge pull request #79 from notzippy/develop
-* 083309b Merge remote-tracking branch 'remotes/revel/master' into develop
-* 798be6f Merge pull request #78 from notzippy/develop
-* b26569c Added gohttptest suite For go coverage
-* 33d2892 Updated static package, moved the model into a package called model Added schema to the gorp package
-* 9154eed Merge pull request #77 from olivierlemasle/fixace
-* 1650355 Fix Ace template for error 403
-* 7fa7471 Merge pull request #71 from wariosolis/develop
-* 301a4c1 Merge pull request #72 from ptman/patch-1
-* bc76c31 Merge pull request #73 from notzippy/develop
-* f9eaf8f Added missed MIT license
-* 03baf1b Provide csrftoken on first result of session
-* 2f861cb Gorm - support for non-default database port
+* 2004e06 Merge pull request #95 from notzippy/develop
+* db4e6ed Moved SimpleStack to new package
+* 5478708 Added go get to fetch the test cases dependency Modified allowed failures to version 1.8 fast http uses github.com/klauspost/compress which uses math/bits introduced in version 1.9 of Go Windows builds are "flakey" so disabled them from changing the results
+* ed10a4c Merge pull request #94 from notzippy/develop
+* 54cf5f2 Patchset v0.21 Added additional test cases Added version.go file Updated FastHTTPServer, GOTestServer to implement new GetKeys() Additional documentation
+* 7800165 Merge pull request #93 from revel/master
+* bdf48fb Merge pull request #92 from notzippy/develop
+* beaae3f Fixed import error
+* 717d81e Merge pull request #91 from notzippy/develop
+* b8b02f4 Reorganization, readme updates Moved auth example into its own folder Updated root readme Updated CSRF
+* 32c2c83 Merge pull request #90 from notzippy/develop
+* 7b66c65 Found old logger statement, updated
+* ab8de1d Merge pull request #89 from notzippy/develop
+* a3b6d49 Removed old logger
+* c8b7cbd Merge pull request #88 from notzippy/develop
+* 9e06773 Fix CSRF The google http server does not fully populate the Request.URL so this check fails. closes #83
+* f17799d Merge pull request #87 from notzippy/develop
+* 7406b4f Added in code to shutdown server properly
+* 66cdf97 Merge pull request #86 from notzippy/develop
+* 3d09446 Corrected some issues with test_suite
+* 4c4a251 Merge pull request #85 from notzippy/develop
+* ab908ee Updated CSRF test cases Added travis modified test engine
+* 46a140c Merge pull request #84 from notzippy/develop
+* b545a18 Updated to use the revel.StopServer
+* 8011b77 Reformatted code
+* 37b34b8 Updated modules to support OnAppStop functionality Enhanced fasthttp server to support shutdown
 
 [[revel/cron](https://github.com/revel/cron)]
 
@@ -101,27 +102,21 @@ deps
 
 [[revel/examples](https://github.com/revel/examples)]
 
-* 4dc1669 Merge pull request #50 from notzippy/develop
-* 0f077e3 Removed go 1.8, fasthttp is not compatible with this version so the tests would not function
-* 2bc7266 Merge pull request #49 from notzippy/develop
-* ecebaeb Added second booking application, updated travis to test. Added test for fasthttp server
-* cd43d38 Merge pull request #48 from notzippy/develop
-* b9615d6 Try different version of go1.8
-* 43021ec Merge pull request #47 from notzippy/develop
-* 7526295 Updated booking application to add test for coverage Added watch.mode=eager
-* 2c29790 Merge pull request #44 from uplus/fix_chat_websocket
-* 086f597 fix chat websocket example
-* 413481b Merge pull request #43 from notzippy/develop
-* b508f3f Websocket example fix closes #41
-* d540397 Merge pull request #35 from ptman/patch-1
-* 40530c1 Merge pull request #42 from notzippy/develop
-* 5a196a1 Added missed GPL license to examples
-* 8475398 Fixing remains of Id -> ID cleanup
+* dcd9daf Merge pull request #53 from notzippy/develop
+* 42aee59 Fixed issue with error checking closes #52
+* 66dd813 Merge pull request #51 from notzippy/develop
+* 917bf1a Updated examples Updated booking module to work with changed session Updated to remove any references to old log messages
 
 [[revel/revel.github.io](https://github.com/revel/revel.github.io)]
 
-* b8cc7f7 Merge pull request #174 from revel/master
-* 59992a3 develop v0.20.0-dev
+* af214b3 Merge pull request #181 from notzippy/develop
+* eb2b456 Updated revel tool to reflect changes in revel/cmd
+* 97ee610 Merge pull request #180 from revel/master
+* fbff2b8 Merge pull request #179 from notzippy/develop
+* 7a5f03f Updated dep version, added some information
+* e27e812 Merge pull request #178 from notzippy/develop
+* 62e1aa4 Updated Documents Updated header to add in links to pages Alter layout to fluid Added Startup , Stop section Added github repo Skeletons reference Forced code min-wdth 1000px Updated booking example to reflect changes to app Updated main page to reflect changes to Revel Added new keys details Updated concepts description to include reference to the engines and mux Added new mux page Removed revel.TRACE loggers Added vendor organization Added session enging Updated session description Updated startup stop section Updated tool description Added using vendor and deps Added new quick reference points Updated  tutorial
+* a54f9dc Fixed spelling
 
 [[revel/heroku-buildpack-go-revel](https://github.com/revel/heroku-buildpack-go-revel)]
 

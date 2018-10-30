@@ -10,7 +10,9 @@ export PATH=${GOPATH}/bin:$PATH
 
 cd ${dir}
 
-update_version ${src}/revel/version.go ${ver} ${date} ${min}
+update_version revel ${src}/revel/version.go ${ver} ${date} ${min}
+update_version cmd ${src}/cmd/version.go ${ver} ${date} ${min}
+update_version modules ${src}/modules/version.go ${ver} ${date} ${min}
 update_web ${src}/revel.github.io/_data/version.yaml ${ver} ${date} ${min}
 update_readme ${src}/revel/README.md ${ver} ${date}
 # TODO: come up with a better changelog

@@ -1,16 +1,17 @@
 #!/bin/bash
 
 function update_version() {
-    file=$1
-    ver=$2
-    date=$3
-    min=$4
+    package=$1
+    file=$2
+    ver=$3
+    date=$4
+    min=$5
     cat <<EOF > $file
-// Copyright (c) 2012-2017 The Revel Framework Authors, All rights reserved.
+// Copyright (c) 2012-2018 The Revel Framework Authors, All rights reserved.
 // Revel Framework source code and usage is governed by a MIT style
 // license that can be found in the LICENSE file.
 
-package revel
+package ${package}
 
 const (
 	// Version current Revel version

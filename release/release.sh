@@ -36,7 +36,9 @@ done
 # add updated changelog to release notes
 # notifications
 
-update_version ${src}/revel/version.go ${next}-dev ${date} ${min}
+update_version revel ${src}/revel/version.go ${next}-dev ${date} ${min}
+update_version cmd ${src}/cmd/version.go ${next}-dev ${date} ${min}
+update_version modules ${src}/modules/version.go ${next}-dev ${date} ${min}
 update_web ${src}/revel.github.io/_data/version.yaml ${next}-dev ${date} ${min}
 update_readme ${src}/revel/README.md ${next}-dev ${date}
 
