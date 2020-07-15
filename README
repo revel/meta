@@ -1,14 +1,13 @@
 Revel Meta
 ====================
 
-- For revel users,  please ignore this repo
-
-
 Top level information about the revel project,
 used to construct the website, tarballs, 
 documentation and images.
 
-To restor a specifc version of Revel set the GOPATH and then use
+Dependent app use `go get github.com/sparrc/gdm` to fetch the `gdm` tool.
+
+To restore a specifc version of Revel set the GOPATH (either to an empty folder or your default folder) and then use
 
 	gdm restore -f vXXXXX.godeps
 
