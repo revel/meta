@@ -30,7 +30,6 @@ deps=""
 deps+=" github.com/agtorre/gocolorize"
 deps+=" github.com/revel/pathtree"
 deps+=" golang.org/x/net/websocket"
-deps+=" gopkg.in/fsnotify/fsnotify.v1"
 deps+=" github.com/go-gorp/gorp"
 deps+=" github.com/mattn/go-sqlite3"
 deps+=" golang.org/x/crypto/bcrypt"
@@ -44,22 +43,24 @@ deps+=" github.com/jessevdk/go-flags"
 deps+=" github.com/stretchr/testify/assert"
 deps+=" github.com/twinj/uuid"
 deps+=" github.com/kr/pty"
+deps+=" github.com/fsnotify/fsnotify"
+deps+=" github.com/pkg/errors"
+deps+=" golang.org/x/tools/go/packages"
+deps+=" github.com/patrickmn/go-cache"
+deps+=" github.com/juju/errors"
+deps+=" github.com/valyala/tcplisten"
 
-# Deprecated, remove v 21
-deps+=" github.com/klauspost/compress/gzip"
-deps+=" github.com/klauspost/compress/zlib"
+# Deprecated, remove v 1.0.1
+deps+=" gopkg.in/fsnotify/fsnotify.v1"
+deps+=" gopkg.in/Masterminds/squirrel.v1"
+deps+=" gopkg.in/gorp.v2"
 
 # Casbin module auth
 deps+=" github.com/casbin/casbin"
 
 # GORP module
-deps+=" gopkg.in/Masterminds/squirrel.v1"
-deps+=" gopkg.in/gorp.v2"
-
-# Remove github.com/robfig/go-cache release v0.20.0
-deps+=" github.com/robfig/go-cache"
-deps+=" github.com/patrickmn/go-cache"
-
+deps+=" github.com/Masterminds/squirrel"
+deps+=" github.com/go-gorp/gorp"
 
 # From gorm module
 deps+=" github.com/jinzhu/gorm"

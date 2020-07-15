@@ -7,3 +7,14 @@ Revel Meta
 Top level information about the revel project,
 used to construct the website, tarballs, 
 documentation and images.
+
+To restor a specifc version of Revel set the GOPATH and then use
+
+	gdm restore -f vXXXXX.godeps
+
+Then build your Revel cmd using the build command
+
+	go build -o revel github.com/revel/cmd/revel
+
+
+
